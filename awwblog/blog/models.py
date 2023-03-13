@@ -38,7 +38,7 @@ class Post(models.Model):
 
     #to get the comment with parents is none and ativeis true, we ccan use this 
     def get_comments(self):
-        return self.comments.filter(parrent=None).filter(active=True)
+        return self.comments.filter(parent=None).filter(active=True)
 
 
 #model class comments
