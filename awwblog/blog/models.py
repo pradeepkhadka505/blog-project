@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User 
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField 
+from taggit.managers import TaggableManager
 
 # Create your models manager
 class PublishedManager(models.Manager):
@@ -24,6 +25,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length= 10, choices= STATUS_CHOICES,default='draft')
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('-publish',)

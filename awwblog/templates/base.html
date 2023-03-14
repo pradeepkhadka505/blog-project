@@ -29,26 +29,44 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link {% if request.path == '/tag/linux/' %}active{% endif %}" aria-current="page" href="{{ request.scheme }}://{{ request.get_host }}/tag/linux/">Linux</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link1</a>
+            <a class="nav-link {% if request.path == '/tag/tips/' %}active{% endif %}" href="{{ request.scheme }}://{{ request.get_host }}/tag/tips/">Tips</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link2</a>
-          </li>
+         
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tutorial
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item {% if request.path == '/tag/python/' %}active{% endif %}" href="{{ request.scheme }}://{{ request.get_host }}/tag/python/">Python</a>
+            </li>
+            
+            <li>
+              <a class="dropdown-item {% if request.path == '/tag/django/' %}active{% endif %}" href="{{ request.scheme }}://{{ request.get_host }}/tag/django/">Django</a>
+            </li>
+          
+          </ul>
+        </li>
+
         </ul>
-        <form class="d-flex">
-          <input class="form-control mr-0" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" action="/">
+          <input class="form-control mr-0" type="search" value="{{request.GET.q}}" name="q" placeholder="Search" aria-label="Search">
         </form>
       </div>
     </div>
   </nav>
     
     <main class="container my-3">
+      <!-- from here to -->
+      <h2 class="my-3">
+        {% if request.GET.q is not null %}
+          Search Results for "{{ request.GET.q }}"
+        {% endif %}
+      </h2>
+      <!-- here -->
         {% block content %}
 
         {% endblock content %}
